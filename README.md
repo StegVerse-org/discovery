@@ -1,29 +1,51 @@
-# StegVerse Discovery & Manifest System
+# StegVerse Discovery
 
-## Purpose
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![License](https://img.shields.io/github/license/StegVerse-org/discovery)
 
-Automated repo scanning, manifest generation, and StegDB-governed file placement.
+Release: v1.0.0
 
-## Flow
+Discovery and monitoring layer for the StegVerse ecosystem. Identifies, tracks, and wires in components across the distributed architecture.
 
+## What It Does
+
+- **Component discovery** — Auto-detects StegVerse repos and services
+- **State monitoring** — Tracks health and status of ecosystem nodes
+- **StegDB integration** — Wires monitoring data into the canonical database
+- **Architecture validation** — Verifies repo structure against governance manifests
+
+## Install
+
+```bash
+pip install stegverse-discovery
 ```
-Scan Repo → Build Manifest → Submit to StegDB Gate → ALLOW → Execute Placement
-                                    ↓
-                                 DENY/FAIL_CLOSED → Log & Abort
-```
 
-## Usage
+## Quick Start
 
 ```python
-from discovery import DiscoveryEngine
+from discovery import discover_repos, wire_to_stegdb
 
-engine = DiscoveryEngine()
-discoveries = engine.scan_repo("./demo-suite-runner", "demo-suite-runner")
-manifest = engine.generate_manifest("demo-suite-runner", "demo-sandbox", discoveries)
-manifest = engine.submit_for_approval(manifest)
-result = engine.execute_placement(manifest, dry_run=False)
+# Discover all StegVerse org repos
+repos = discover_repos(org="StegVerse-org")
+
+# Wire monitoring to StegDB
+wire_to_stegdb(repos)
 ```
 
 ## Integration
 
-Replace `StegDBStub` with `StegDBClient` from `stegdb/stegdb_wirein.py` when endpoint is live.
+| System | Role |
+|--------|------|
+| StegDB | Canonical monitoring database |
+| demo_ingest_engine | Ingestion state tracking |
+| StegVerse-SDK | SDK component discovery |
+| Trust Kernel | Governance node identification |
+
+## Links
+
+- Repository: https://github.com/StegVerse-org/discovery
+- Issues: https://github.com/StegVerse-org/discovery/issues
+
+---
+
+**StegVerse: Execution is not assumed. Execution is admitted.**
