@@ -1,18 +1,25 @@
 # StegVerse Discovery
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
-![License](https://img.shields.io/github/license/StegVerse-org/discovery)
+![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
 
 Release: v1.0.0
 
-Discovery and monitoring layer for the StegVerse ecosystem. Identifies, tracks, and wires in components across the distributed architecture.
+Discovery and repository-indexing layer for the StegVerse ecosystem.
 
-## What It Does
+This repository identifies, tracks, and wires declared components across the distributed architecture. It is a discovery/indexing layer, not an authority-bearing governance kernel.
 
-- **Component discovery** — Auto-detects StegVerse repos and services
-- **State monitoring** — Tracks health and status of ecosystem nodes
-- **StegDB integration** — Wires monitoring data into the canonical database
-- **Architecture validation** — Verifies repo structure against governance manifests
+---
+
+## What it does
+
+- component discovery for StegVerse repositories and services;
+- state and availability monitoring for ecosystem nodes;
+- manifest-aware repository indexing;
+- StegDB / monitoring integration support;
+- architecture validation support through GSL-compatible manifests.
+
+---
 
 ## Install
 
@@ -20,32 +27,38 @@ Discovery and monitoring layer for the StegVerse ecosystem. Identifies, tracks, 
 pip install stegverse-discovery
 ```
 
-## Quick Start
+---
+
+## Quick start
 
 ```python
 from discovery import discover_repos, wire_to_stegdb
 
-# Discover all StegVerse org repos
 repos = discover_repos(org="StegVerse-org")
-
-# Wire monitoring to StegDB
 wire_to_stegdb(repos)
 ```
+
+---
 
 ## Integration
 
 | System | Role |
-|--------|------|
-| StegDB | Canonical monitoring database |
-| demo_ingest_engine | Ingestion state tracking |
-| StegVerse-SDK | SDK component discovery |
-| Trust Kernel | Governance node identification |
+|---|---|
+| `StegVerse-org/stegverse-gsl` | Manifest and structure validation. |
+| `StegVerse-org/demo_ingest_engine` | Ingestion state tracking. |
+| `StegVerse-org/StegVerse-SDK` | SDK component discovery. |
+| StegDB | Monitoring database / state sink. |
+| Trust Kernel | Private governance node; discovery may reference it but does not expose its authority logic. |
+
+---
+
+## Boundary rule
+
+Discovery identifies declared components and reports observed state. It does not create execution authority, admission authority, endorsement, compatibility recognition, provenance recognition, collaboration, or validation.
+
+---
 
 ## Links
 
 - Repository: https://github.com/StegVerse-org/discovery
 - Issues: https://github.com/StegVerse-org/discovery/issues
-
----
-
-**StegVerse: Execution is not assumed. Execution is admitted.**
